@@ -1,0 +1,2 @@
+netty=org.oyq.remoting.transport.netty.client.NettyRpcClient
+socket=org.oyq.remoting.transport.socket.SocketRpcClient
