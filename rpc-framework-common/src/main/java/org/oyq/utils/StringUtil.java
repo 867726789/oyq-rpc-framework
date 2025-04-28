@@ -1,6 +1,6 @@
 package org.oyq.utils;
 /**
- * Strinig 工具类
+ * String 工具类
  *
  * @author oyq
  * @since 1

@@ -13,8 +13,7 @@ import java.io.Serializable;
  * RPC 请求传输对象.
  * 封装远程方法调用的所有必要信息，包括目标接口、方法名、参数等.
  *
- * @author oyq
- * @since 1.0
+
  */
 @Data
 @Builder

@@ -6,8 +6,7 @@ import lombok.*;
  * RPC 消息传输对象.
  * 用于封装网络传输中的消息头、序列化方式、压缩格式和业务数据.
  *
- * @author oyq
- * @since 1.0
+
  */
 @Data
 @Builder

@@ -7,8 +7,7 @@ import lombok.Getter;
  * 压缩算法类型枚举.
  * 定义支持的压缩算法及其编码标识.
  *
- * @author oyq
- * @since 1.0
+
  */
 @AllArgsConstructor
 @Getter

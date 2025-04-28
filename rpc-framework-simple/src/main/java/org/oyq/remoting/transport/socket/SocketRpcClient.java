@@ -15,8 +15,7 @@ import java.net.Socket;
  * 基于Socket的RPC客户端实现
  * 通过TCP连接发送RPC请求并接收响应
  *
- * @author oyq
- * @since 1.0
+
  */
 public class SocketRpcClient implements RpcRequestTransport {
 

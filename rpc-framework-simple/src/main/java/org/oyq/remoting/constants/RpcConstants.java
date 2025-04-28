@@ -7,8 +7,7 @@ import java.nio.charset.StandardCharsets;
  * RPC 协议常量定义类.
  * 包含协议魔数、编码格式、消息类型等全局常量.
  *
- * @author oyq
- * @since 1.0
+
  */
 public final class RpcConstants {
 

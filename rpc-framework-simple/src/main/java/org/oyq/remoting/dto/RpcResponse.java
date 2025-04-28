@@ -14,8 +14,7 @@ import java.io.Serializable;
  * 用于统一封装远程调用的返回结果，包含状态码、消息和业务数据.
  *
  * @param <T> 响应体数据类型
- * @author oyq
- * @since 1.0
+
  */
 @Data
 @Builder

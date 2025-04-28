@@ -9,8 +9,7 @@ import org.oyq.remoting.dto.RpcRequest;
  *
  * <p>实现类需在 META-INF/services 下提供扩展配置</p>
  *
- * @author oyq
- * @since 1.0
+
  */
 @SPI
 public interface RpcRequestTransport {

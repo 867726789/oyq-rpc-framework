@@ -12,8 +12,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * 基于Socket的RPC服务端实现
  *
- * @author oyq
- * @since 1.0
+
  */
 @Slf4j
 public class SocketRpcServer {
@@ -26,7 +25,7 @@ public class SocketRpcServer {
 
     public void start() {
         try (ServerSocket server = new ServerSocket()) {
-            server.bind(new InetSocketAddress("127.0.0.1",8080));
+            server.bind(new InetSocketAddress("127.0.0.1", 8080));
             Socket socket;
             while ((socket = server.accept()) != null) {
                 log.info("client connected [{}]", socket.getInetAddress());
