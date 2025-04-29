@@ -1,0 +1,1 @@
+loadBalance=org.oyq.loadbalance.loadbalancer.ConsistentHashLoadBalance

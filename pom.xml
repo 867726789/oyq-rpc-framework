@@ -29,6 +29,8 @@
         <protostuff.version>1.7.2</protostuff.version>
         <!--hessian-->
         <hessian.version>4.0.65</hessian.version>
+        <!--bytebuddy-->
+        <bytebuddy.version>1.14.18</bytebuddy.version>
     </properties>
 
     <modules>

@@ -1,9 +1,15 @@
 package org.oyq.remoting.transport.socket;
 
 import lombok.extern.slf4j.Slf4j;
+import org.oyq.config.RpcServiceConfig;
+import org.oyq.factory.SingletonFactory;
+import org.oyq.provider.ServiceProvider;
+import org.oyq.provider.impl.ZkServiceProviderImpl;
+import org.oyq.remoting.transport.RpcServer;
 import org.oyq.utils.concurrent.threadpool.ThreadPoolFactoryUtil;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,17 +21,26 @@ import java.util.concurrent.ExecutorService;
 
  */
 @Slf4j
-public class SocketRpcServer {
+public class SocketRpcServer implements RpcServer {
 
     private final ExecutorService threadPool;
+    private final ServiceProvider serviceProvider;
 
     public SocketRpcServer() {
         threadPool = ThreadPoolFactoryUtil.createCustomThreadPoolIfAbsent("socket-server-rpc-pool");
+        serviceProvider = SingletonFactory.getInstance(ZkServiceProviderImpl.class);
     }
 
+    @Override
+    public void registerService(RpcServiceConfig rpcServiceConfig) {
+        serviceProvider.publishService(rpcServiceConfig);
+    }
+
+    @Override
     public void start() {
         try (ServerSocket server = new ServerSocket()) {
-            server.bind(new InetSocketAddress("127.0.0.1", 8080));
+            String host = InetAddress.getLocalHost().getHostAddress();
+            server.bind(new InetSocketAddress(host, PORT));
             Socket socket;
             while ((socket = server.accept()) != null) {
                 log.info("client connected [{}]", socket.getInetAddress());

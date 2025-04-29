@@ -1,6 +1,7 @@
 package org.oyq;
 
 import org.oyq.config.RpcServiceConfig;
+import org.oyq.proxy.RpcClientProxy;
 import org.oyq.remoting.transport.RpcRequestTransport;
 import org.oyq.remoting.transport.socket.SocketRpcClient;
 

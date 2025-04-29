@@ -16,6 +16,7 @@ import java.net.Socket;
 public class SocketRpcRequestHandlerRunnable implements  Runnable {
     private final Socket socket;
     private final RpcRequestHandler rpcRequestHandler;
+
     public SocketRpcRequestHandlerRunnable(Socket socket) {
         this.socket = socket;
         this.rpcRequestHandler = SingletonFactory.getInstance(RpcRequestHandler.class);

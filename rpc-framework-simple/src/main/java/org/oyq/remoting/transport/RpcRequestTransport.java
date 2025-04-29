@@ -1,5 +1,6 @@
 package org.oyq.remoting.transport;
 
+import org.oyq.config.RpcServiceConfig;
 import org.oyq.extension.SPI;
 import org.oyq.remoting.dto.RpcRequest;
 
@@ -13,7 +14,6 @@ import org.oyq.remoting.dto.RpcRequest;
  */
 @SPI
 public interface RpcRequestTransport {
-
 
     Object sendRpcRequest(RpcRequest rpcRequest);
 

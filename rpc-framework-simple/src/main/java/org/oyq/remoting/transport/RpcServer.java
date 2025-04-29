@@ -1,8 +1,12 @@
 package org.oyq.remoting.transport;
 
+import org.oyq.config.RpcServiceConfig;
+
 public interface RpcServer {
 
-    public static final int PORT = 9998;
+    int PORT = 9090;
+
+    void registerService(RpcServiceConfig rpcServiceConfig);
 
     void start() throws Exception;
 }

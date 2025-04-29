@@ -27,13 +27,13 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public final class CuratorUtils {
 
-    private static final int BASE_SLEEP_TIME = 1000;//基础等待时间，也就是过多少秒重试
-    private static final int MAX_RETRIES = 3;//最大重试次数
-    public static final String ZK_REGISTER_ROOT_PATH = "/my-rpc";//根路径名字
-    private static final Map<String, List<String>> SERVICE_ADDRESS_MAP = new ConcurrentHashMap<>();//缓存服务名称和对应服务实例列表的映射关系
-    private static final Set<String> REGISTERED_PATH_SET = ConcurrentHashMap.newKeySet();//储已经注册的服务路径
-    private static CuratorFramework zkClient;//CuratorFramework 实例，用于与 ZooKeeper 服务器建立连接。
-    private static final String DEFAULT_ZOOKEEPER_ADDRESS = "127.0.0.1:2181";//默认zookeeper服务地址
+    private static final int BASE_SLEEP_TIME = 1000; //基础等待时间，也就是过多少秒重试
+    private static final int MAX_RETRIES = 3; //最大重试次数
+    public static final String ZK_REGISTER_ROOT_PATH = "/my-rpc"; //根路径名字
+    private static final Map<String, List<String>> SERVICE_ADDRESS_MAP = new ConcurrentHashMap<>(); //缓存服务名称和对应服务实例列表的映射关系
+    private static final Set<String> REGISTERED_PATH_SET = ConcurrentHashMap.newKeySet(); //储已经注册的服务路径
+    private static CuratorFramework zkClient; //CuratorFramework 实例，用于与 ZooKeeper 服务器建立连接。
+    private static final String DEFAULT_ZOOKEEPER_ADDRESS = "127.0.0.1:2181"; //默认zookeeper服务地址
 
     private CuratorUtils() {
     }

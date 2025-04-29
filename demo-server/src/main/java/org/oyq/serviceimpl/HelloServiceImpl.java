@@ -1,0 +1,21 @@
+package org.oyq.serviceimpl;
+
+import lombok.extern.slf4j.Slf4j;
+import org.oyq.Hello;
+import org.oyq.HelloService;
+
+@Slf4j
+public class HelloServiceImpl implements HelloService {
+
+    static {
+        System.out.println("HelloServiceImpl被创建");
+    }
+
+    @Override
+    public String hello(Hello hello) {
+        log.info("HelloServiceImpl2收到: {}.", hello.getMessage());
+        String result = "Hello description is " + hello.getDescription();
+        log.info("HelloServiceImpl2返回: {}.", result);
+        return result;
+    }
+}

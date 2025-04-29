@@ -19,25 +19,25 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
-public class ZKServiceProviderImpl implements ServiceProvider {
+public class ZkServiceProviderImpl implements ServiceProvider {
 
-    private final Map<String,Object> serviceMap;
-    private final Set<String> registerdService;
+    private final Map<String, Object> serviceMap;
+    private final Set<String> registerService;
     private final ServiceRegistry serviceRegistry;
 
-    public ZKServiceProviderImpl() {
+    public ZkServiceProviderImpl() {
         this.serviceMap = new ConcurrentHashMap<>();
-        this.registerdService = new HashSet<>();
+        this.registerService = new HashSet<>();
         this.serviceRegistry = ExtensionLoader.getExtensionLoader(ServiceRegistry.class).getExtension(ServiceRegistryEnum.ZK.getName());
     }
 
     @Override
     public void addService(RpcServiceConfig rpcServiceConfig) {
         String rpcServiceName = rpcServiceConfig.getRpcServiceName();
-        if (registerdService.contains(rpcServiceName)) {
+        if (registerService.contains(rpcServiceName)) {
             return;
         }
-        registerdService.add(rpcServiceName);
+        registerService.add(rpcServiceName);
         serviceMap.put(rpcServiceName, rpcServiceConfig.getService());
         log.info("Add service: {} and interfaces:{}", rpcServiceName, rpcServiceConfig.getService().getClass().getInterfaces());
     }

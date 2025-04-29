@@ -1,6 +1,9 @@
 package org.oyq.remoting.transport.socket;
 
+import org.oyq.enums.ServiceDiscoveryEnum;
 import org.oyq.exception.RpcException;
+import org.oyq.extension.ExtensionLoader;
+import org.oyq.registry.ServiceDiscovery;
 import org.oyq.remoting.dto.RpcRequest;
 import org.oyq.remoting.dto.RpcResponse;
 import org.oyq.remoting.transport.RpcRequestTransport;
@@ -18,12 +21,11 @@ import java.net.Socket;
 
  */
 public class SocketRpcClient implements RpcRequestTransport {
+    private final ServiceDiscovery serviceDiscovery;
 
-    /**
-     * 默认服务端地址（本机环回地址）
-     */
-    private static final InetSocketAddress DEFAULT_SERVER_ADDRESS =
-            new InetSocketAddress("127.0.0.1", 8080);
+    public SocketRpcClient() {
+        this.serviceDiscovery = ExtensionLoader.getExtensionLoader(ServiceDiscovery.class).getExtension(ServiceDiscoveryEnum.ZK.getName());
+    }
 
     /**
      * 发送RPC请求到服务端
@@ -34,9 +36,11 @@ public class SocketRpcClient implements RpcRequestTransport {
      */
     @Override
     public Object sendRpcRequest(RpcRequest rpcRequest) {
+        InetSocketAddress inetSocketAddress = serviceDiscovery.lookupService(rpcRequest);
+
         try (Socket socket = new Socket()) {
             // 1. 建立Socket连接
-            socket.connect(DEFAULT_SERVER_ADDRESS);
+            socket.connect(inetSocketAddress);
 
             // 2. 序列化请求对象
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
