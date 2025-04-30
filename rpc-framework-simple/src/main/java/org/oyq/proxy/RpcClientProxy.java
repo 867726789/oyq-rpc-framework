@@ -15,6 +15,7 @@ import org.oyq.remoting.transport.socket.SocketRpcClient;
 import org.oyq.remoting.transport.socket.SocketRpcServer;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.UUID;
@@ -38,16 +39,22 @@ public class RpcClientProxy implements InvocationHandler {
         this.rpcServiceConfig = new RpcServiceConfig();
     }
 
-    @SuppressWarnings("unchecked")
+//    @SuppressWarnings("unchecked")
     public <T> T getProxy(Class<T> clazz) {
-//        return (T) new ByteBuddy()
-//                .subclass(clazz)
-//                .method(ElementMatchers.any())
-//                .intercept(InvocationHandlerAdapter.of(this))
-//                .make()
-//                .load(clazz.getClassLoader())
-//                .getLoaded();
-        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
+        try {
+            return (T) new ByteBuddy()
+                    .subclass(clazz)
+                    .method(ElementMatchers.any())
+                    .intercept(InvocationHandlerAdapter.of(this))
+                    .make()
+                    .load(clazz.getClassLoader())
+                    .getLoaded()
+                    .getDeclaredConstructor()
+                    .newInstance();
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+//        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
     }
 
 

@@ -8,5 +8,5 @@ public interface RpcServer {
 
     void registerService(RpcServiceConfig rpcServiceConfig);
 
-    void start() throws Exception;
+    void start();
 }

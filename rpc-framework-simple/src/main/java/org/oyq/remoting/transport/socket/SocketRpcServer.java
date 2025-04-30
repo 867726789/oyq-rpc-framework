@@ -1,12 +1,14 @@
 package org.oyq.remoting.transport.socket;
 
 import lombok.extern.slf4j.Slf4j;
+import org.oyq.config.CustomShutdownHook;
 import org.oyq.config.RpcServiceConfig;
 import org.oyq.factory.SingletonFactory;
 import org.oyq.provider.ServiceProvider;
 import org.oyq.provider.impl.ZkServiceProviderImpl;
 import org.oyq.remoting.transport.RpcServer;
 import org.oyq.utils.concurrent.threadpool.ThreadPoolFactoryUtil;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -21,6 +23,7 @@ import java.util.concurrent.ExecutorService;
 
  */
 @Slf4j
+@Component
 public class SocketRpcServer implements RpcServer {
 
     private final ExecutorService threadPool;
@@ -41,6 +44,7 @@ public class SocketRpcServer implements RpcServer {
         try (ServerSocket server = new ServerSocket()) {
             String host = InetAddress.getLocalHost().getHostAddress();
             server.bind(new InetSocketAddress(host, PORT));
+            CustomShutdownHook.getCustomShutdownHook().clearAll();
             Socket socket;
             while ((socket = server.accept()) != null) {
                 log.info("client connected [{}]", socket.getInetAddress());

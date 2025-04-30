@@ -35,9 +35,6 @@ public class RpcRequestHandler {
         Object result;
         try {
             Object param = rpcRequest.getParamTypes();
-            if (param instanceof Hello) {
-                System.out.println("正确");
-            }
             Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParamTypes());
             result = method.invoke(service, rpcRequest.getParameters());
             log.info("service:[{}] successful invoke method:[{}]", rpcRequest.getInterfaceName(), rpcRequest.getMethodName());
